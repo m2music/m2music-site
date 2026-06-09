@@ -87,7 +87,6 @@
     padding: 150px 0 0;
     overflow: hidden;
   }
-  /* faint stage-light glow */
   header.hero::before {
     content: "";
     position: absolute;
@@ -96,12 +95,22 @@
     background: radial-gradient(circle, rgba(0,138,252,0.22) 0%, rgba(0,138,252,0) 65%);
     pointer-events: none;
   }
+  /* sweeping staff-lines motif */
+  .hero-staff {
+    position: absolute;
+    bottom: 90px; left: -5%;
+    width: 110%;
+    height: auto;
+    opacity: 0.10;
+    pointer-events: none;
+  }
   .hero-content {
     position: relative;
     max-width: 780px;
     margin: 0 auto;
     text-align: center;
     padding: 0 24px 70px;
+    z-index: 1;
   }
   .pill {
     display: inline-block;
@@ -125,10 +134,7 @@
     line-height: 1.08;
     margin-bottom: 22px;
   }
-  h1 em {
-    font-style: normal;
-    color: var(--cyan);
-  }
+  h1 em { font-style: normal; color: var(--cyan); }
   .hero-sub {
     font-size: clamp(1.05rem, 2vw, 1.2rem);
     color: rgba(255,255,255,0.78);
@@ -152,10 +158,7 @@
     box-shadow: 0 6px 22px rgba(0,138,252,0.35);
   }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,138,252,0.45); }
-  .btn-ghost {
-    border: 1.5px solid rgba(255,255,255,0.35);
-    color: #fff;
-  }
+  .btn-ghost { border: 1.5px solid rgba(255,255,255,0.35); color: #fff; }
   .btn-ghost:hover { background: rgba(255,255,255,0.08); }
 
   /* ---------- Marquee ---------- */
@@ -164,6 +167,7 @@
     border-top: 1px solid rgba(255,255,255,0.12);
     padding: 22px 0;
     overflow: hidden;
+    z-index: 1;
   }
   .marquee-label {
     text-align: center;
@@ -221,11 +225,7 @@
     color: var(--navy);
     margin-bottom: 18px;
   }
-  .lede {
-    font-size: 1.1rem;
-    color: var(--ink-soft);
-    max-width: 640px;
-  }
+  .lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 640px; }
 
   /* Services */
   .services-grid {
@@ -242,6 +242,15 @@
     border-radius: var(--radius);
     padding: 32px 28px;
   }
+  .card .icon {
+    width: 46px; height: 46px;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 18px;
+  }
+  .card .icon svg { width: 26px; height: 26px; stroke: var(--cyan); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .card h3 {
     font-size: 1.2rem;
     font-weight: 700;
@@ -250,34 +259,60 @@
   }
   .card p { color: var(--ink-soft); font-size: 0.98rem; }
 
-  /* Productions */
+  /* Productions — poster grid */
   .productions { background: #F7FAFE; }
   .prod-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
     margin-top: 46px;
   }
   .prod-card {
     background: #fff;
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 22px 24px;
+    overflow: hidden;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   }
   .prod-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 26px rgba(0,57,109,0.10);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,57,109,0.12);
     border-color: var(--cyan);
   }
-  .prod-card .name {
+  .poster {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    background: linear-gradient(165deg, var(--navy) 0%, var(--navy-deep) 100%);
+    overflow: hidden;
+  }
+  .poster img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+  }
+  /* placeholder shows whenever the image is missing */
+  .poster .ph {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.28);
+  }
+  .poster .ph svg { width: 54px; height: 54px; fill: currentColor; }
+  .prod-meta { padding: 16px 18px 18px; }
+  .prod-meta .name {
     font-weight: 700;
     color: var(--navy);
-    font-size: 1.02rem;
+    font-size: 1rem;
+    line-height: 1.25;
     margin-bottom: 4px;
   }
-  .prod-card .type {
-    font-size: 0.82rem;
+  .prod-meta .type {
+    font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -293,6 +328,14 @@
   }
   @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } }
   .about-grid p { color: var(--ink-soft); margin-bottom: 16px; }
+  .about-photo {
+    margin-top: 28px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    display: none; /* hidden until images/about.jpg exists */
+  }
+  .about-photo img { width: 100%; height: auto; display: block; }
   .fact-stack { display: grid; gap: 14px; }
   .fact {
     background: var(--navy);
@@ -310,15 +353,24 @@
     background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
     color: #fff;
     text-align: center;
+    padding-bottom: 0;
   }
   .contact h2 { color: #fff; }
   .contact .lede { margin: 0 auto 36px; color: rgba(255,255,255,0.75); }
+  /* NYC skyline silhouette bridging into the footer */
+  .skyline {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 70px;
+    fill: #001225;
+  }
 
   /* Footer */
   footer {
     background: #001225;
     color: rgba(255,255,255,0.6);
-    padding: 40px 0;
+    padding: 30px 0 40px;
     font-size: 0.9rem;
   }
   .footer-inner {
@@ -348,6 +400,25 @@
 </nav>
 
 <header class="hero" id="top">
+  <!-- decorative staff lines -->
+  <svg class="hero-staff" viewBox="0 0 1400 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <g stroke="#FFFFFF" stroke-width="1.5" fill="none">
+      <path d="M0,40  C 350,10  1050,70  1400,40"/>
+      <path d="M0,75  C 350,45  1050,105 1400,75"/>
+      <path d="M0,110 C 350,80  1050,140 1400,110"/>
+      <path d="M0,145 C 350,115 1050,175 1400,145"/>
+      <path d="M0,180 C 350,150 1050,210 1400,180"/>
+    </g>
+    <g fill="#FFFFFF">
+      <ellipse cx="380" cy="62" rx="11" ry="8" transform="rotate(-18 380 62)"/>
+      <rect x="389" y="14" width="2.6" height="48" rx="1.3"/>
+      <ellipse cx="760" cy="132" rx="11" ry="8" transform="rotate(-18 760 132)"/>
+      <rect x="769" y="84" width="2.6" height="48" rx="1.3"/>
+      <ellipse cx="1080" cy="96" rx="11" ry="8" transform="rotate(-18 1080 96)"/>
+      <rect x="1089" y="48" width="2.6" height="48" rx="1.3"/>
+    </g>
+  </svg>
+
   <div class="hero-content">
     <span class="pill">Contracting<span class="dot">·</span>Payroll<span class="dot">·</span>Coordination<span class="dot">·</span>Since 1999</span>
     <h1>We take care of the people<br>who make <em>the music</em>.</h1>
@@ -396,14 +467,26 @@
     <p class="lede">A production's music department runs on details — contracts, scale rates, benefits, doubles, subs, payroll. We've spent over twenty-five years making sure none of them fall through the cracks.</p>
     <div class="services-grid">
       <div class="card">
+        <div class="icon" aria-hidden="true">
+          <!-- contract / pen -->
+          <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 14l2 2 4-5"/></svg>
+        </div>
         <h3>Music Contracting</h3>
         <p>We hire and book the orchestra — from the first chair to the last sub — drawing on long relationships with New York's finest musicians and a deep bench across the country for touring productions.</p>
       </div>
       <div class="card">
+        <div class="icon" aria-hidden="true">
+          <!-- payroll / note + dollar -->
+          <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M3 10h2M19 14h2"/></svg>
+        </div>
         <h3>Payroll &amp; Employer of Record</h3>
         <p>As employer of record, we administer musician payroll under AFM collective bargaining agreements — wages, pension, health benefits, and everything in between — accurately and on time, every week.</p>
       </div>
       <div class="card">
+        <div class="icon" aria-hidden="true">
+          <!-- coordination / baton arc -->
+          <svg viewBox="0 0 24 24"><path d="M4 20L18 6"/><path d="M18 6l2-2"/><path d="M4 12c2.5 1 5.5 1 8 0"/><path d="M6 17c3 1.2 7 1.2 10 0"/></svg>
+        </div>
         <h3>Coordination &amp; Consulting</h3>
         <p>From budgeting an orchestra to navigating union agreements, we work alongside producers, general managers, and music departments to keep the music side of a production running smoothly.</p>
       </div>
@@ -417,17 +500,95 @@
     <h2>The shows we're proud to work on.</h2>
     <p class="lede">On Broadway, on the road, and on screen — here's where you'll find our musicians right now.</p>
     <div class="prod-grid">
-      <div class="prod-card"><div class="name">Hamilton</div><div class="type">Broadway</div></div>
-      <div class="prod-card"><div class="name">Aladdin</div><div class="type">Broadway</div></div>
-      <div class="prod-card"><div class="name">Moulin Rouge! The Musical</div><div class="type">Broadway</div></div>
-      <div class="prod-card"><div class="name">&amp; Juliet</div><div class="type">Broadway</div></div>
-      <div class="prod-card"><div class="name">Little Shop of Horrors</div><div class="type">Off-Broadway</div></div>
-      <div class="prod-card"><div class="name">Schmigadoon!</div><div class="type">Off-Broadway</div></div>
-      <div class="prod-card"><div class="name">MJ</div><div class="type">National Tour</div></div>
-      <div class="prod-card"><div class="name">Beauty and the Beast</div><div class="type">National Tour</div></div>
-      <div class="prod-card"><div class="name">Dirty Dancing</div><div class="type">National Tour</div></div>
-      <div class="prod-card"><div class="name">West Side Story</div><div class="type">Paper Mill Playhouse</div></div>
-      <div class="prod-card"><div class="name">GIULIA</div><div class="type">In Development · PAC NYC</div></div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/hamilton.jpg" alt="Hamilton poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Hamilton</div><div class="type">Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/aladdin.jpg" alt="Aladdin poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Aladdin</div><div class="type">Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/moulin-rouge.jpg" alt="Moulin Rouge! The Musical poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Moulin Rouge! The Musical</div><div class="type">Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/and-juliet.jpg" alt="& Juliet poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">&amp; Juliet</div><div class="type">Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/little-shop.jpg" alt="Little Shop of Horrors poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Little Shop of Horrors</div><div class="type">Off-Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/schmigadoon.jpg" alt="Schmigadoon! poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Schmigadoon!</div><div class="type">Off-Broadway</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/mj-tour.jpg" alt="MJ National Tour poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">MJ</div><div class="type">National Tour</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/beauty-tour.jpg" alt="Beauty and the Beast National Tour poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Beauty and the Beast</div><div class="type">National Tour</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/dirty-dancing.jpg" alt="Dirty Dancing National Tour poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">Dirty Dancing</div><div class="type">National Tour</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/wss-papermill.jpg" alt="West Side Story at Paper Mill Playhouse poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">West Side Story</div><div class="type">Paper Mill Playhouse</div></div>
+      </div>
+
+      <div class="prod-card">
+        <div class="poster">
+          <div class="ph" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <img src="images/posters/giulia.jpg" alt="GIULIA poster" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="prod-meta"><div class="name">GIULIA</div><div class="type">In Development · PAC NYC</div></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -441,6 +602,9 @@
         <p>M² Music was founded in 1999 by working musicians who knew the business from inside the pit. That perspective still shapes how we work: we understand what it means to be on the other side of the contract, because we've been there.</p>
         <p>Today we serve as the music department's quiet infrastructure for some of the biggest titles on Broadway and on tour — handling contracting, payroll administration, and coordination under AFM agreements, with the care and accuracy this work deserves.</p>
         <p>We're based in New York, and we answer our own phones.</p>
+        <figure class="about-photo" id="aboutPhoto">
+          <img src="images/about.jpg" alt="M² Music" onload="document.getElementById('aboutPhoto').style.display='block'">
+        </figure>
       </div>
       <div class="fact-stack">
         <div class="fact">
@@ -467,6 +631,18 @@
     <p class="lede">Whether you're budgeting an orchestra, mounting a tour, or just have a question about how this all works — we're happy to help.</p>
     <a class="btn btn-primary" href="mailto:info@m2music.nyc">Email us</a>
   </div>
+  <!-- NYC skyline silhouette bridging into the footer -->
+  <svg class="skyline" viewBox="0 0 1400 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M0,140 L0,96 L40,96 L40,72 L74,72 L74,104 L108,104 L108,58 L120,58 L120,46 L140,46 L140,104
+             L180,104 L180,80 L220,80 L220,112 L252,112 L252,40 L262,40 L262,28 L284,28 L284,40 L296,40 L296,112
+             L330,112 L330,88 L368,88 L368,104 L398,104 L398,52 L410,52 L410,24 L416,24 L416,12 L422,12 L422,24 L428,24 L428,52 L440,52 L440,104
+             L478,104 L478,76 L516,76 L516,112 L560,112 L560,64 L600,64 L600,96 L640,96 L640,84
+             L668,84 L668,36 L680,36 L680,20 L686,20 L686,8 L692,8 L692,20 L698,20 L698,36 L710,36 L710,96
+             L744,96 L744,72 L788,72 L788,108 L828,108 L828,56 L840,56 L840,44 L862,44 L862,108
+             L900,108 L900,80 L944,80 L944,112 L984,112 L984,68 L996,68 L996,48 L1018,48 L1018,68 L1030,68 L1030,112
+             L1068,112 L1068,88 L1110,88 L1110,104 L1148,104 L1148,60 L1160,60 L1160,32 L1166,32 L1166,18 L1172,18 L1172,32 L1178,32 L1178,60 L1190,60 L1190,104
+             L1228,104 L1228,76 L1272,76 L1272,112 L1312,112 L1312,92 L1360,92 L1360,104 L1400,104 L1400,140 Z"/>
+  </svg>
 </section>
 
 <footer>
