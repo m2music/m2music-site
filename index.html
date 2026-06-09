@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M² Music — Musician Contracting, Payroll & Coordination</title>
+<meta name="description" content="M² Music is a New York-based music contracting, payroll, and coordination company serving Broadway, national tours, TV/film, and live events since 1999.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800;9..40,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #00396D;
+    --navy-deep: #00224A;
+    --cyan: #008AFC;
+    --ice: #EAF4FF;
+    --paper: #FFFFFF;
+    --ink: #16273A;
+    --ink-soft: #4A5C70;
+    --line: #D8E5F2;
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+    text-decoration: none;
+  }
+  .logo sup { color: var(--cyan); font-size: 0.7em; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover { color: #fff; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+
+  /* ---------- Hero ---------- */
+  header.hero {
+    position: relative;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 70%, #001736 100%);
+    color: #fff;
+    padding: 150px 0 0;
+    overflow: hidden;
+  }
+  /* faint stage-light glow */
+  header.hero::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -150px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,138,252,0.22) 0%, rgba(0,138,252,0) 65%);
+    pointer-events: none;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 24px 70px;
+  }
+  .pill {
+    display: inline-block;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.22);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 28px;
+  }
+  .pill .dot { color: var(--cyan); margin: 0 6px; }
+  h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin-bottom: 22px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--cyan);
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.78);
+    max-width: 560px;
+    margin: 0 auto 36px;
+    font-weight: 400;
+  }
+  .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 30px;
+    border-radius: 999px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--cyan);
+    color: #fff;
+    box-shadow: 0 6px 22px rgba(0,138,252,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,138,252,0.45); }
+  .btn-ghost {
+    border: 1.5px solid rgba(255,255,255,0.35);
+    color: #fff;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+  /* ---------- Marquee ---------- */
+  .marquee-band {
+    position: relative;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding: 22px 0;
+    overflow: hidden;
+  }
+  .marquee-label {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 16px;
+  }
+  .marquee {
+    display: flex;
+    width: max-content;
+    animation: scroll 48s linear infinite;
+  }
+  .marquee:hover { animation-play-state: paused; }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .marquee-track { display: flex; gap: 14px; padding-right: 14px; }
+  .show-pill {
+    white-space: nowrap;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 999px;
+    padding: 10px 22px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.92);
+  }
+  .show-pill span { color: var(--cyan); margin-right: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+    .marquee-track { flex-wrap: wrap; justify-content: center; }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding: 90px 0; }
+  .eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 18px;
+  }
+  .lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 640px;
+  }
+
+  /* Services */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 50px;
+  }
+  @media (max-width: 860px) { .services-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--ice);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--cyan);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+  }
+  .card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .card p { color: var(--ink-soft); font-size: 0.98rem; }
+
+  /* Productions */
+  .productions { background: #F7FAFE; }
+  .prod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+    margin-top: 46px;
+  }
+  .prod-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .prod-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0,57,109,0.10);
+    border-color: var(--cyan);
+  }
+  .prod-card .name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1.02rem;
+    margin-bottom: 4px;
+  }
+  .prod-card .type {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cyan);
+  }
+
+  /* About */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: start;
+  }
+  @media (max-width: 860px) { .about-grid { grid-template-columns: 1fr; gap: 36px; } }
+  .about-grid p { color: var(--ink-soft); margin-bottom: 16px; }
+  .fact-stack { display: grid; gap: 14px; }
+  .fact {
+    background: var(--navy);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 22px 26px;
+  }
+  .fact .big { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+  .fact .small { font-size: 0.88rem; color: rgba(255,255,255,0.7); margin-top: 2px; }
+  .fact.accent { background: var(--cyan); }
+  .fact.accent .small { color: rgba(255,255,255,0.85); }
+
+  /* Contact */
+  .contact {
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .contact h2 { color: #fff; }
+  .contact .lede { margin: 0 auto 36px; color: rgba(255,255,255,0.75); }
+
+  /* Footer */
+  footer {
+    background: #001225;
+    color: rgba(255,255,255,0.6);
+    padding: 40px 0;
+    font-size: 0.9rem;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  footer .logo { font-size: 1.1rem; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+  footer a:hover { color: #fff; }
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="nav-inner">
+    <a class="logo" href="#top">M<sup>2</sup> MUSIC</a>
+    <ul class="nav-links">
+      <li><a href="#services">What we do</a></li>
+      <li><a href="#productions">Productions</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-content">
+    <span class="pill">Contracting<span class="dot">·</span>Payroll<span class="dot">·</span>Coordination<span class="dot">·</span>Since 1999</span>
+    <h1>We take care of the people<br>who make <em>the music</em>.</h1>
+    <p class="hero-sub">M² Music handles musician contracting, payroll, and coordination for Broadway, national tours, television, film, and live events — so producers can focus on the show, and musicians can focus on the work.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">Get in touch</a>
+      <a class="btn btn-ghost" href="#services">What we do</a>
+    </div>
+  </div>
+
+  <div class="marquee-band" aria-label="Current productions">
+    <div class="marquee-label">Now playing · On the books</div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="show-pill"><span>♪</span>Hamilton</div>
+        <div class="show-pill"><span>♪</span>Aladdin</div>
+        <div class="show-pill"><span>♪</span>Moulin Rouge! The Musical</div>
+        <div class="show-pill"><span>♪</span>&amp; Juliet</div>
+        <div class="show-pill"><span>♪</span>Little Shop of Horrors</div>
+        <div class="show-pill"><span>♪</span>Schmigadoon!</div>
+        <div class="show-pill"><span>♪</span>MJ — National Tour</div>
+        <div class="show-pill"><span>♪</span>Beauty and the Beast — National Tour</div>
+        <div class="show-pill"><span>♪</span>Dirty Dancing — National Tour</div>
+        <div class="show-pill"><span>♪</span>West Side Story — Paper Mill Playhouse</div>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <div class="show-pill"><span>♪</span>Hamilton</div>
+        <div class="show-pill"><span>♪</span>Aladdin</div>
+        <div class="show-pill"><span>♪</span>Moulin Rouge! The Musical</div>
+        <div class="show-pill"><span>♪</span>&amp; Juliet</div>
+        <div class="show-pill"><span>♪</span>Little Shop of Horrors</div>
+        <div class="show-pill"><span>♪</span>Schmigadoon!</div>
+        <div class="show-pill"><span>♪</span>MJ — National Tour</div>
+        <div class="show-pill"><span>♪</span>Beauty and the Beast — National Tour</div>
+        <div class="show-pill"><span>♪</span>Dirty Dancing — National Tour</div>
+        <div class="show-pill"><span>♪</span>West Side Story — Paper Mill Playhouse</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">What we do</div>
+    <h2>Everything between the booking and the downbeat.</h2>
+    <p class="lede">A production's music department runs on details — contracts, scale rates, benefits, doubles, subs, payroll. We've spent over twenty-five years making sure none of them fall through the cracks.</p>
+    <div class="services-grid">
+      <div class="card">
+        <h3>Music Contracting</h3>
+        <p>We hire and book the orchestra — from the first chair to the last sub — drawing on long relationships with New York's finest musicians and a deep bench across the country for touring productions.</p>
+      </div>
+      <div class="card">
+        <h3>Payroll &amp; Employer of Record</h3>
+        <p>As employer of record, we administer musician payroll under AFM collective bargaining agreements — wages, pension, health benefits, and everything in between — accurately and on time, every week.</p>
+      </div>
+      <div class="card">
+        <h3>Coordination &amp; Consulting</h3>
+        <p>From budgeting an orchestra to navigating union agreements, we work alongside producers, general managers, and music departments to keep the music side of a production running smoothly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="productions" id="productions">
+  <div class="wrap">
+    <div class="eyebrow">Productions</div>
+    <h2>The shows we're proud to work on.</h2>
+    <p class="lede">On Broadway, on the road, and on screen — here's where you'll find our musicians right now.</p>
+    <div class="prod-grid">
+      <div class="prod-card"><div class="name">Hamilton</div><div class="type">Broadway</div></div>
+      <div class="prod-card"><div class="name">Aladdin</div><div class="type">Broadway</div></div>
+      <div class="prod-card"><div class="name">Moulin Rouge! The Musical</div><div class="type">Broadway</div></div>
+      <div class="prod-card"><div class="name">&amp; Juliet</div><div class="type">Broadway</div></div>
+      <div class="prod-card"><div class="name">Little Shop of Horrors</div><div class="type">Off-Broadway</div></div>
+      <div class="prod-card"><div class="name">Schmigadoon!</div><div class="type">Off-Broadway</div></div>
+      <div class="prod-card"><div class="name">MJ</div><div class="type">National Tour</div></div>
+      <div class="prod-card"><div class="name">Beauty and the Beast</div><div class="type">National Tour</div></div>
+      <div class="prod-card"><div class="name">Dirty Dancing</div><div class="type">National Tour</div></div>
+      <div class="prod-card"><div class="name">West Side Story</div><div class="type">Paper Mill Playhouse</div></div>
+      <div class="prod-card"><div class="name">GIULIA</div><div class="type">In Development · PAC NYC</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="eyebrow">About M²</div>
+        <h2>Built by musicians, for musicians.</h2>
+        <p>M² Music was founded in 1999 by working musicians who knew the business from inside the pit. That perspective still shapes how we work: we understand what it means to be on the other side of the contract, because we've been there.</p>
+        <p>Today we serve as the music department's quiet infrastructure for some of the biggest titles on Broadway and on tour — handling contracting, payroll administration, and coordination under AFM agreements, with the care and accuracy this work deserves.</p>
+        <p>We're based in New York, and we answer our own phones.</p>
+      </div>
+      <div class="fact-stack">
+        <div class="fact">
+          <div class="big">Since 1999</div>
+          <div class="small">Serving Broadway, tours, TV &amp; film</div>
+        </div>
+        <div class="fact accent">
+          <div class="big">AFM Agreements</div>
+          <div class="small">Union payroll, pension &amp; benefits done right</div>
+        </div>
+        <div class="fact">
+          <div class="big">New York City</div>
+          <div class="small">Home base, with a national reach</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#fff;opacity:0.7;">Contact</div>
+    <h2>Let's talk about your production.</h2>
+    <p class="lede">Whether you're budgeting an orchestra, mounting a tour, or just have a question about how this all works — we're happy to help.</p>
+    <a class="btn btn-primary" href="mailto:info@m2music.nyc">Email us</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <a class="logo" href="#top">M<sup>2</sup> MUSIC</a>
+    <div>© 2026 M² Music · New York, NY · <a href="https://m2music.nyc">m2music.nyc</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
